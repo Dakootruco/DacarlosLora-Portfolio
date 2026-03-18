@@ -1,7 +1,37 @@
-
-
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 function Contact() {
+    const form = useRef();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [status, setStatus] = useState(null);
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setStatus(null);
+
+        // Replace these IDs with your actual EmailJS credentials
+        // You can get them by signing up at emailjs.com
+        const serviceID = 'service_portafoliodlt';
+        const templateID = 'template_portafoliodlt';
+        const publicKey = 'qZGKVarVV2U6dnb1R';
+
+        emailjs.sendForm(serviceID, templateID, form.current, publicKey)
+            .then((result) => {
+                setStatus('success');
+                setIsSubmitting(false);
+                form.current.reset(); // Clear form fields
+
+                // Disappear success message after 5 seconds
+                setTimeout(() => setStatus(null), 5000);
+            }, (error) => {
+                setStatus('error');
+                setIsSubmitting(false);
+                console.error(error.text);
+            });
+    };
+
     return (
         <section id="contacto" className="w-full min-h-screen bg-[#0b1120] py-20 px-5 md:px-[10%] box-border border-t border-gray-800/30 flex flex-col items-center justify-center">
 
@@ -31,11 +61,27 @@ function Contact() {
                 </div>
 
                 {/* Right side: Contact Form */}
-                <div className="w-full md:w-7/12 p-8 md:p-12">
-                    <form className="flex flex-col gap-5 w-full">
+                <div className="w-full md:w-7/12 p-8 md:p-12 relative overflow-hidden">
+
+                    {/* Status Feedback Messages */}
+                    {status === 'success' && (
+                        <div className="absolute top-0 left-0 w-full bg-green-500/10 border-b border-green-500/50 p-4 flex items-center justify-center gap-2 text-green-400">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                            ¡Mensaje enviado con éxito! Me pondré en contacto pronto.
+                        </div>
+                    )}
+                    {status === 'error' && (
+                        <div className="absolute top-0 left-0 w-full bg-red-500/10 border-b border-red-500/50 p-4 flex items-center justify-center gap-2 text-red-400">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Hubo un error al enviar el mensaje. Por favor intenta más tarde.
+                        </div>
+                    )}
+
+                    <form ref={form} onSubmit={sendEmail} className={`flex flex-col gap-5 w-full ${status ? 'mt-8' : ''} transition-all duration-300`}>
                         <div className="flex flex-col gap-1.5">
                             <label className="text-white text-sm font-medium ml-1">Nombre</label>
                             <input
+                                name="user_name"
                                 className="w-full bg-[#202021] border border-[#3f3f46] text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] transition-colors placeholder:text-gray-500"
                                 type="text"
                                 placeholder="Tu nombre completo"
@@ -47,6 +93,7 @@ function Contact() {
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-white text-sm font-medium ml-1">Correo Electrónico</label>
                                 <input
+                                    name="user_email"
                                     className="w-full bg-[#202021] border border-[#3f3f46] text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] transition-colors placeholder:text-gray-500"
                                     type="email"
                                     placeholder="tu@correo.com"
@@ -56,6 +103,7 @@ function Contact() {
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-white text-sm font-medium ml-1">Teléfono</label>
                                 <input
+                                    name="user_phone"
                                     className="w-full bg-[#202021] border border-[#3f3f46] text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] transition-colors placeholder:text-gray-500"
                                     type="tel"
                                     placeholder="+1 (809) 000-0000"
@@ -66,6 +114,7 @@ function Contact() {
                         <div className="flex flex-col gap-1.5">
                             <label className="text-white text-sm font-medium ml-1">Mensaje</label>
                             <textarea
+                                name="message"
                                 className="w-full min-h-[150px] resize-y bg-[#202021] border border-[#3f3f46] text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] transition-colors placeholder:text-gray-500"
                                 placeholder="Cuéntame sobre tu proyecto o como puedo ayudarte..."
                                 required
@@ -73,14 +122,16 @@ function Contact() {
                         </div>
 
                         <button
-                            className="bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-4 px-6 rounded-lg transition-colors mt-2 flex items-center justify-center gap-2"
-                            type="button"
-                            onClick={(e) => e.preventDefault()}
+                            className="bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-4 px-6 rounded-lg transition-colors mt-2 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                            type="submit"
+                            disabled={isSubmitting}
                         >
-                            Enviar Mensaje
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
+                            {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+                            {!isSubmitting && (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            )}
                         </button>
                     </form>
                 </div>

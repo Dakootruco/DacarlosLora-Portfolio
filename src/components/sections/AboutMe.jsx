@@ -8,7 +8,7 @@ import { RiTailwindCssFill } from "react-icons/ri";
 
 function AboutMe() {
   return (
-    <section id="acerca" className="relative w-full min-h-screen bg-[#0d1932] flex flex-col md:flex-row items-center justify-center md:justify-between px-5 md:px-[10%] box-border py-20 gap-10 md:gap-0">
+    <section id="acerca-de-mi" className="relative w-full min-h-screen bg-[#0d1932] flex flex-col md:flex-row items-center justify-center md:justify-between px-5 md:px-[10%] box-border py-20 gap-10 md:gap-0">
       <div className="text-white z-10 w-full md:w-1/2 flex flex-col items-start text-left">
         <h2 className="text-3xl md:text-[45px] font-bold mb-6 tracking-tight">
           Acerca de mí
@@ -48,7 +48,7 @@ function AboutMe() {
         <div className="absolute w-[280px] h-[280px] md:w-[350px] md:h-[350px] bg-[#38bdf8]/10 rounded-full blur-[60px] -z-10"></div>
         <img
           src={yo}
-          alt="Yo"
+          alt="Foto de Dacarlos Lora"
           className="w-[280px] h-[280px] md:w-[380px] md:h-[380px] object-cover rounded-[32px] shadow-2xl bg-white"
         />
       </div>

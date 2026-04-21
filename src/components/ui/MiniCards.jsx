@@ -1,5 +1,5 @@
 import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaPython, FaGitAlt, FaGithub, FaFigma } from 'react-icons/fa';
-import { SiPostgresql, SiTypescript, SiTailwindcss, SiExpress, SiCplusplus } from 'react-icons/si';
+import { SiPostgresql, SiTypescript, SiTailwindcss, SiExpress, SiCplusplus, SiAstro } from 'react-icons/si';
 import { TbBrandCSharp } from 'react-icons/tb';
 import { VscVscode } from 'react-icons/vsc';
 
@@ -19,7 +19,8 @@ const iconsArray = [
     <FaGitAlt key="git" className="w-full h-full text-[#F05032] filter group-hover:brightness-125 transition-all" />,
     <FaGithub key="github" className="w-full h-full text-white filter group-hover:brightness-125 transition-all" />,
     <FaFigma key="figma" className="w-full h-full text-[#F24E1E] filter group-hover:brightness-125 transition-all" />,
-    <VscVscode key="vscode" className="w-full h-full text-[#007ACC] filter group-hover:brightness-125 transition-all" />
+    <VscVscode key="vscode" className="w-full h-full text-[#007ACC] filter group-hover:brightness-125 transition-all" />,
+    <SiAstro key="astro" className="w-full h-full text-[#06B6D4] filter group-hover:brightness-125 transition-all" />
 ];
 
 function MiniCards({ skill }) {

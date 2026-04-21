@@ -6,7 +6,7 @@ import { SiExpress } from "react-icons/si";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { SiTypescript } from "react-icons/si";
 import { SiSupabase } from "react-icons/si";
-
+import { SiAstro } from "react-icons/si";
 
 
 // Icon Helper mapping
@@ -32,6 +32,9 @@ const techIcons = {
     ),
     Supabase: (
         <SiSupabase color="#3ecf8e" size={24} className='hover:animate-spin' />
+    ),
+    Astro: (
+        <SiAstro color="#ff5a03" size={24} className='hover:animate-spin' />
     )
 };
 
@@ -61,13 +64,11 @@ function Cards({ project }) {
         <div className="bg-[#18181b] border border-[#27272a] rounded-2xl overflow-hidden flex flex-col hover:border-gray-500 transition-colors shadow-lg shadow-black/30 group">
 
             {/* Top Image Box */}
-            <div className="w-full h-[220px] overflow-hidden bg-[#0d1117] relative p-4 flex items-end justify-center rounded-t-2xl">
-                {/* Subtle glow behind image depending on the card to make it look premium */}
-                <div className="absolute inset-0 bg-linear-to-t from-[#18181b] to-transparent z-10 bottom-0 h-1/2" />
+            <div className="w-full h-[220px] overflow-hidden bg-[#0d1117] relative flex items-center justify-center rounded-t-2xl p-2">
                 <img
                     src={image}
                     alt={title}
-                    className="w-[90%] h-[90%] object-cover object-top rounded-t-xl z-0 group-hover:scale-105 transition-transform duration-500 shadow-[0_-5px_20px_rgba(0,0,0,0.5)] border border-[#27272a] border-b-0"
+                    className="max-w-full max-h-full object-contain z-0 rounded-t-lg group-hover:scale-105 transition-transform duration-500"
                     onError={(e) => {
                         // Fallback base64 image if the actual image file doesn't exist yet
                         e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 800 400" preserveAspectRatio="none"><rect width="800" height="400" fill="%2327272a"></rect><text x="50%" y="50%" fill="%2364748b" text-anchor="middle" font-size="24" dy=".3em">Preview</text></svg>';

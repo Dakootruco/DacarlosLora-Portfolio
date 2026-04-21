@@ -1,4 +1,5 @@
 // src/data/portfolioData.js
+import imgSagilSolutions from '../assets/SagilSolutions.jpeg';
 
 export const projectsList = [
     {
@@ -12,6 +13,15 @@ export const projectsList = [
     },
     {
         id: 2,
+        title: "SagilSolutions",
+        description: "Gestiòn estrategicas de compras para mipymes y emprendedores.",
+        image: imgSagilSolutions,
+        technologies: ["Astro", "Tailwind CSS", "TypeScript"],
+        repoLink: "https://github.com/Dakootruco/sagilsolutionsweb",
+        liveLink: "https://sagilsolutions.com/"
+    },
+    {
+        id: 3,
         title: "TasteLogic",
         description: "Gestion de Restaurantes.",
         image: "/assets/TasteLogic.jpg",
